@@ -1,13 +1,15 @@
-// Call Stack 
+// 1-callstack.js
+// Understanding LIFO (Last In, First Out)
 
 function first() {
-  console.log("First");
+  console.log("1. Inside First Function");
 }
 
 function second() {
-  console.log("Second");
+  console.log("2. Inside Second Function");
 }
 
-first(); // call stack
-second(); // call stack
-
+console.log("Start");
+first();  // Pushed to Call Stack -> Executed -> Popped
+second(); // Pushed to Call Stack -> Executed -> Popped
+console.log("End");

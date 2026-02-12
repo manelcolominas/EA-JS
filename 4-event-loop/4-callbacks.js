@@ -1,21 +1,24 @@
 
-console.log("Inicio");
+// 4-callbacks.js
+// Simulating an async operation (like a Database query) using callbacks
 
-// Función asíncrona simulada con setTimeout 
-// Como si fuera una consulta a una BD
-function getUserData(id, callback) {
+console.log("Start");
+
+function fetchUser(id, callback) {
+  console.log(`...Fetching data for user ${id}...`);
+  
   setTimeout(() => {
-    console.log(`Datos obtenidos para el usuario ${id}`);
-    callback({ id, name: "Alice", age: 25 });
+    // Data "received" after 2 seconds
+    const user = { id: id, name: "Alice", age: 25 };
+    callback(user);
   }, 2000);
 }
 
-// Callback que maneja los datos recibidos
-function processUserData(user) {
-  console.log(`Procesando usuario: ${user.name}, edad: ${user.age}`);
+// The function to run when data arrives
+function displayUser(user) {
+  console.log(`User Received: ${user.name}, Age: ${user.age}`);
 }
 
-// Llamamos a la función asíncrona
-getUserData(1, processUserData);
+fetchUser(1, displayUser);
 
-console.log("Fin");
+console.log("End");

@@ -1,15 +1,19 @@
-console.log("Inicio");
+// 8-async-await.js
+// Syntactic sugar over Promises. Code looks synchronous, but it's non-blocking.
 
-async function fetchPost() {
+console.log("Start");
+
+async function fetchPostData() {
   try {
+    // 'await' pauses this function, but NOT the main thread
     const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
     const data = await response.json();
-    console.log("Datos recibidos:", data);
+    console.log("Data Received:", data.title);
   } catch (error) {
-    console.error("Error al obtener los datos:", error);
+    console.error("Error fetching data:", error);
   }
 }
 
-fetchPost();
+fetchPostData();
 
-console.log("Fin");
+console.log("End (Main thread continues)");

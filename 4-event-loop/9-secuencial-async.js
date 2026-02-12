@@ -1,48 +1,31 @@
-console.log("Inicio");
+// 9-async-sequential.js
+// The "Holy Grail" of readability. Looks like Java/Python, acts like JS.
 
-// Función para obtener un usuario de una API
-function getUser(userId) {
-  return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al obtener el usuario");
-      return response.json();
-    });
+// Clean Async Helpers
+async function getUser(id) {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    if (!res.ok) throw new Error("User not found");
+    return res.json();
 }
 
-// Función para obtener los posts de un usuario
-function getPosts(userId) {
-  return fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al obtener los posts");
-      return response.json();
-    });
+async function getPosts(userId) {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
+    return res.json();
 }
 
-// Función para obtener los comentarios del post
-function getComments(postId) {
-  return fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al obtener comentarios del post");
-      return response.json();
-    });
-}
-
-async function fetchOrderDetails() {
+async function fetchFullDashboard() {
   try {
-    const user = await getUser(1);
-    const posts = await getPosts(user.id);
-    const comments = await getComments(posts[0].id);
-
-    console.log("Comentarios del primer post:", comments);
-    console.log("Fin");
+    console.log("1. Getting User...");
+    const user = await getUser(1); // Waits here
+    
+    console.log(`2. User ${user.name} found. Getting Posts...`);
+    const posts = await getPosts(user.id); // Waits here
+    
+    console.log(`3. Found ${posts.length} posts. Done.`);
+    
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Process Failed:", error);
   }
 }
 
-console.log("Inicio");
-
-fetchOrderDetails();
-
-
-
+fetchFullDashboard();

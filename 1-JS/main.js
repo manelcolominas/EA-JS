@@ -1,7 +1,7 @@
 /// JavaScript Data Types
 
 // ------------------ Primitive Data Types ------------------
-// Immutable, stored by value
+// Stored by value
 
 // Numbers (integer & floating-point)
 let age = 25;

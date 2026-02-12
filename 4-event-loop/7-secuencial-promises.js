@@ -1,39 +1,24 @@
-// Función para obtener un usuario de una API
-function getUser(userId) {
-  return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al obtener el usuario");
-      return response.json();
-    });
-}
+// 7-promise-chaining.js
+// Solving Callback Hell with a flat chain
 
-// Función para obtener los posts de un usuario
-function getPosts(userId) {
-  return fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al obtener los posts");
-      return response.json();
-    });
-}
+// Helpers returning Promises
+const getUser = (id) => fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(r => r.json());
+const getPosts = (userId) => fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`).then(r => r.json());
+const getComments = (postId) => fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`).then(r => r.json());
 
-// Función para obtener los comentarios del post
-function getComments(postId) {
-  return fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al obtener comentarios del post");
-      return response.json();
-    });
-}
-
-// Encadenando Promesas
-console.log("Inicio");
+console.log("Start Sequence");
 
 getUser(1)
-  .then((user) => getPosts(user.id))
-  .then((posts) => getComments(posts[0].id))
-  .then(comments => {
-    console.log("Comentarios del primer post:", comments);
-    console.log("Fin");
+  .then(user => {
+      console.log(`1. User Found: ${user.name}`);
+      return getPosts(user.id); // Return promise for the next .then()
   })
-  .catch(error => console.error("Error:", error));
-
+  .then(posts => {
+      console.log(`2. First Post ID: ${posts[0].id}`);
+      return getComments(posts[0].id);
+  })
+  .then(comments => {
+      console.log(`3. First Comment: "${comments[0].body.substring(0, 20)}..."`);
+      console.log("End Sequence");
+  })
+  .catch(error => console.error("CRITICAL ERROR:", error));
