@@ -46,3 +46,5 @@ node main.js
 ## Estrutura
 
 He utilitzat el codi del propi repositori com a referencia per a fer l'exercici
+
+ChatGPT:       const newusersdatajson = usersdatajsonfiltered.map(({id, name, address: {city}}) => ({id, name, city}));

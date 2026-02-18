@@ -6,52 +6,63 @@
 // Statistics: Calculate the total number of characters in all usernames combined using reduce.
 
 fetch('https://jsonplaceholder.typicode.com/users/')
-  .then(response => response.json())
-  .then(users => {
-      // YOUR CODE STARTS HERE
-      console.log("--- Processed Users ---");
-      // 3. Add Guest User at the start using Spread (...)
-      
-      console.log("--- Statistics ---");
+    .then(response => response.json())
+    .then(users => {
+        // YOUR CODE STARTS HERE
 
-      const newusersdatajson = [];
-      users.forEach(function (user) {
+        // CLASSIC WAY
+
         // 1. Filter even IDs
-        if (user.id%2 === 0) {
-            // 2. Map to clean objects {id, name, city}
-            let newelement = {
-                id: user.id, 
-                name: user.name,
-                city: user.address.city
-                };
-            newusersdatajson.push(newelement);
-        }
-      })
+        console.log("1. Filter even IDs");
+        const usersdatajsonfiltered = users.filter(function (user) {
+            if (user.id%2 === 0) {
+                return true
+            }
+        })
+        usersdatajsonfiltered.forEach(function (user) {
+            console.log("id: " + user.id +", name: " + user.name + ", phone: " + user.phone+" website: "+ user.phone);
+        })
+        console.log()
+
+        // USING ARROW FUNCTION WITH FILTER
+        /*
+        const usersdatajsonfiltered = users.filter((user) => user.id%2 === 0);
+         */
+
+        const newusersdatajson = usersdatajsonfiltered.map(({id, name, address: {city}}) => ({id, name, city}));
+
+        console.log("2. Map data");
+        newusersdatajson.forEach(function (element){
+            console.log("id: " + element.id +", name: " + element.name +", city: " + element.city);
+        })
+        console.log();
+        /*
+
+         */
+        // 3. Add Guest User at the start using Spread (...)
+
+        const newuser =  {
+            id: 1,
+            name: "Guest User",
+            city: "Guest City"
+        };
+
+        const new_newusersdatajson = [newuser,...newusersdatajson];
+
+        console.log(" 3. Add Guest User at the start using Spread (...)");
+        new_newusersdatajson.forEach(function (element){
+            console.log("id: " + element.id +", name: " + element.name +", city: " + element.city);
+        })
+        console.log();
+
+        // 4. Reduce to count total characters in names
+        console.log("4. Reduce to count total characters in names");
+        const totalCharactersNames = users.reduce((total, user) => total + user.name.length, 0);
+        console.log(totalCharactersNames);
+        console.log();
 
 
-      newusersdatajson.forEach(function (element){
-        console.log("id: " + element.id +", name: " + element.name +", city: " + element.city);
-      })
+    });
 
-      // 3. Add Guest User at the start using Spread (...)
-      const newuser =  {
-        id: 1, 
-        name: "Guest User",
-        city: "Guest City"
-      };
-
-      const newnewusersdatajson = [newuser,...newusersdatajson];
-
-      newnewusersdatajson.forEach(function (element){
-        console.log("id: " + element.id +", name: " + element.name +", city: " + element.city);
-      })
-
-      // 4. Reduce to count total characters in names
-
-      const totalCharactersNames = users.reduce((total, user) => total + user.name.length, 0);
-      console.log(totalCharactersNames);
-
-  });
-
-  // https://jsonplaceholder.typicode.com/todos/?id=1&id=2&id=3
-  // https://jsonplaceholder.typicode.com/users/?id=1&id=2&id=3
+// https://jsonplaceholder.typicode.com/todos/?id=1&id=2&id=3
+// https://jsonplaceholder.typicode.com/users/?id=1&id=2&id=3
