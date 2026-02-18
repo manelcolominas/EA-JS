@@ -4,7 +4,7 @@ const developers = []
 
 // Non-Functional Approach
 for (let i = 0; i < students.length; i++) {
-  if (students[i].course === 'Web Development') {
+  if (students[i].course === 'Web Development') { // valor númeric seria 3 iguals
     developers.push(students[i])
   }
 }

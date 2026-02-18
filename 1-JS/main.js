@@ -11,13 +11,17 @@ console.log(typeof price, price); // number 99.99
 
 // Strings
 const firstName = "John Doe";
+// tipus de variable
 console.log(typeof firstName, firstName); // string John Doe
+
 
 const greeting = `Hola ${firstName}, tu color preferido es el verde`; // Template Literals
 console.log(greeting); 
 
 // Booleans
 const isAdult = true;
+
+
 console.log(typeof isAdult, isAdult); // boolean true
 
 // Type Coercion in JavaScript (Dynamic types)
@@ -33,8 +37,8 @@ console.log("10" / "2"); // 5 (Both strings converted to numbers)
 console.log(5 + true);  // 6 (true converted to 1)
 console.log(5 + false); // 5 (false converted to 0)
 
-console.log("10" == 10); // true (loose equality converts "10" to Number)
-console.log("10" === 10); // false (strict equality, no type conversion)
+console.log("10" == 10); // true (loose equality converts "10" to Number) dos iguals == comparar els valors númerics de les varibles
+console.log("10" === 10); // false (strict equality, no type conversion) tres iguals === comparar els valors númerics i el tipusd de variables
 
 // Type Conversion in JavaScript
 const str = "42";
@@ -73,9 +77,9 @@ const { personName, personAge } = person; // Destructuring
 const colors = ["red", "green", "blue"];
 console.log(typeof colors, colors); // object [ 'red', 'green', 'blue' ]
 
-const [color1, color2] = colors; // Destructuring
-console.log(color1, color2);
-
+const [color1, color2] = colors; // Destructuring separa el vector colors en dos altres vectors, color1 = ["red"] i color2 = ["green"]
+console.log(color1); //
+console.log(color2);
 
 // Functions (special object storing executable code)
 function greet ( name ) {
@@ -83,9 +87,55 @@ function greet ( name ) {
 }
 console.log(typeof greet, greet('Alice')); // function "Hi, I'm Alice"
 
+
 // Function arrow
+// Estructura d’una Arrow Function
+// (paràmetres) => expressió
 const greetArrow = (name) => `Hi, I'm ${name}`;
-console.log(typeof greetArrow, greetArrow('Alice')); // function "Hi, I'm Alice"
+console.log(typeof greetArrow, greetArrow('Manel')); // function "Hi, I'm Alice"
+
+// Equivalent amb funcións clàssiques:
+
+/* const returnHiName = function(name) {
+    return `Hi, I'm ${name}`;
+  };
+  
+  greetArrow('Manel')      // "Hi, I'm Manel"
+
+*/
+
+/*
+
+  function expression.
+  
+  🔹 Característiques:
+
+    - És una funció guardada dins una variable
+
+    - La funció pot ser anònima
+
+    - NO té hoisting útil
+
+    - No es pot cridar abans de definir-la
+
+*/
+
+/*
+function returnHiName(name) {
+  return `Hi, I'm ${name}`;
+} */
+
+/*
+🔹 Característiques
+
+És una function declaration
+
+Té nom propi (returnHiName)
+
+Té hoisting complet
+
+Pots cridar-la abans que aparegui al codi
+*/
 
 
 // Date (handling time & date)

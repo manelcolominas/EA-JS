@@ -10,10 +10,48 @@ fetch('https://jsonplaceholder.typicode.com/users/')
   .then(users => {
       // YOUR CODE STARTS HERE
       console.log("--- Processed Users ---");
-      // 1. Filter even IDs
-      // 2. Map to clean objects {id, name, city}
       // 3. Add Guest User at the start using Spread (...)
       
       console.log("--- Statistics ---");
+
+      const newusersdatajson = [];
+      users.forEach(function (user) {
+        // 1. Filter even IDs
+        if (user.id%2 === 0) {
+            // 2. Map to clean objects {id, name, city}
+            let newelement = {
+                id: user.id, 
+                name: user.name,
+                city: user.address.city
+                };
+            newusersdatajson.push(newelement);
+        }
+      })
+
+
+      newusersdatajson.forEach(function (element){
+        console.log("id: " + element.id +", name: " + element.name +", city: " + element.city);
+      })
+
+      // 3. Add Guest User at the start using Spread (...)
+      const newuser =  {
+        id: 1, 
+        name: "Guest User",
+        city: "Guest City"
+      };
+
+      const newnewusersdatajson = [newuser,...newusersdatajson];
+
+      newnewusersdatajson.forEach(function (element){
+        console.log("id: " + element.id +", name: " + element.name +", city: " + element.city);
+      })
+
       // 4. Reduce to count total characters in names
+
+      const totalCharactersNames = users.reduce((total, user) => total + user.name.length, 0);
+      console.log(totalCharactersNames);
+
   });
+
+  // https://jsonplaceholder.typicode.com/todos/?id=1&id=2&id=3
+  // https://jsonplaceholder.typicode.com/users/?id=1&id=2&id=3

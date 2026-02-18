@@ -7,27 +7,51 @@
 const baseWords = ["I", "go"];
 // baseWords.push("home"); // ❌ Mutates the original array
 // Instead of .push(), we create a NEW array
+
+// ... -> spread operator
+// Els ... serveixen per agafar tot el que hi ha dins d’un array o objecte i posar-ho directament en un altre array o objecte.
 const finalWords = [...baseWords, "home"]; 
 console.log("Original:", baseWords); // ["I", "go"]
 console.log("New:", finalWords);      // ["I", "go", "home"]
+
+/*
+  const person = {
+    name: "Manel",
+    age: 30
+  };
+
+  const personFull = {
+    ...person,
+    city: "Girona"
+  };
+
+  console.log(personFull);
+*/
+
 
 // 2. Prepending (Adding to the start)
 const sensorData = [20, 30, 50, 60];
 const expandedData = [5, 7, ...sensorData];
 console.log("Expanded Data:", expandedData);
 
+const expandedData1 = [...sensorData,5, 7];
+console.log("Expanded Data:", expandedData1);
+
 // 3. Extracting parts (Slice)
 // slice(start, end) returns a copy of a portion of an array
-const firstTwoElements = sensorData.slice(0, 2); 
+// amb quines parts de l'array et vols quedar
+const firstTwoElements = sensorData.slice(1, 3); 
 console.log("Sliced (First 2):", firstTwoElements); // [20, 30]
 
 // 4. Inserting into the middle (The "Spread + Slice" Strategy)
 // Task: Insert 40 before 50
 const targetValue = 50;
-const index = sensorData.indexOf(targetValue);
+const index = sensorData.indexOf(targetValue); // l'índex del valor target
+console.log(index); // index = 2;
+console.log(sensorData.slice(index)); // [50, 60]
 
 const insertedArray = [
-  ...sensorData.slice(0, index), // Elements before 50
+  ...sensorData.slice(0, index), // Elements before 50 [20, 30]
   40,                            // New element
   ...sensorData.slice(index)     // Elements from 50 onwards
 ];
@@ -36,10 +60,8 @@ console.log("After Insertion:", insertedArray); // [20, 30, 40, 50, 60]
 // 5. Destructuring & Rest Operator
 // Very useful for separating a "head" from the "tail" of a dataset
 const coordinates = [10, 20, 30, 40];
-const [x, y, ...restOfCoordinates] = coordinates;
+const [x, y, ...restOfCoordinates] = coordinates; // separar el array en diferents elements
 
 console.log("X:", x); // 10
 console.log("Y:", y); // 20
 console.log("Others:", restOfCoordinates); // [30, 40]
-
-

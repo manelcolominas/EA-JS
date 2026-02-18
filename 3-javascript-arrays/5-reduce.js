@@ -1,18 +1,26 @@
 import { students } from "./0-data.js";
 
+/*
 let total1 = 0;
 for (let i = 0; i < points.length; i++) {
   total += points[i];
 }
+*/
 
+/*
 const total2 = points.reduce((total, point) => {
   return total + point;
 }, 0);
+*/
 
+/*
 const total3 = points.reduce((total, point) => total + point, 0);
+*/
 
-const totalAges = students.reduce((total, student) => total + student.age, 0);
+//const totalAges = students.reduce((total, student) => total + student.age, 0);
+const totalAges = students.reduce((total, student) => total + student.name.length, 0);
 
+console.log(totalAges);
 
 const developers = [
   {
@@ -46,6 +54,6 @@ console.log(result);
 
 // console.log(total)
 
-// const result = students.reduce((total, student) => total + student.age, 0)
+// const result = students.reduce((total, student) => total + student.age, 0) <----
 
 // console.log(result)

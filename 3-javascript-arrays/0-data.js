@@ -1,4 +1,5 @@
 // sample array of students
+/*
 const students = [
   {
     name: "Jill",
@@ -30,6 +31,23 @@ const students = [
     age: 20,
     course: "Financial Management",
   },
+];
+
+ */
+
+const students = [
+  {
+    name: "Jill",
+    lastname: "Doe",
+    age: 24,
+    course: "Marketing",
+  },
+  {
+    name: "John",
+    lastname: "Doe",
+    age: 22,
+    course: "Web Development",
+  }
 ];
 
 export { students };

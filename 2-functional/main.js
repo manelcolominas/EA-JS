@@ -75,7 +75,3 @@ const logger = (operation, a, b) => {
 
 const result = logger(add, 5, 10);
 console.log(`Result: ${result}`);
-
-
-
-
